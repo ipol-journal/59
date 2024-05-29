@@ -8,12 +8,12 @@ WORKDIR $bin
 COPY . .
 
 WORKDIR $bin/efros_leung_v1.0/efros_leung_accel/src
-RUN make -j4
-RUN cp efrosLeung_accel $bin
+RUN make -j32 && \
+    cp efrosLeung_accel $bin
 
 WORKDIR $bin/efros_leung_v1.0/efros_leung_orig/src
-RUN make -j4
-RUN cp efros_leung $bin
+RUN make -j32 && \
+    cp efros_leung $bin
 
 
 

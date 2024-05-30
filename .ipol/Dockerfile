@@ -8,13 +8,12 @@ WORKDIR $bin
 COPY . .
 
 WORKDIR $bin/efros_leung_v1.0/efros_leung_accel/src
-RUN make -j32 && \
+RUN make -j4 && \
     cp efrosLeung_accel $bin
 
 WORKDIR $bin/efros_leung_v1.0/efros_leung_orig/src
-RUN make -j32 && \
+RUN make -j4 && \
     cp efros_leung $bin
-
 
 
 # the execution will happen in the folder /workdir/exec
@@ -29,6 +28,4 @@ ENV PATH $bin:$PATH
 ENV HOME /home/ipol
 # chmod 777 so that any user can use the HOME, in case the docker is run with -u 1001:1001
 RUN groupadd -g 1000 ipol && useradd -m -u 1000 -g 1000 ipol -d $HOME && chmod -R 777 $HOME
-RUN apt-get update && apt-get install -y time
-RUN apt-get update && apt-get install -y python3-tabulate
 USER ipol
